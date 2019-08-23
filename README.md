@@ -1,3 +1,3 @@
-# Node Express boilerplate
+# Node Chat
 
-Simple project boilerplate to start a Node Express server
+Project for learning purposes
