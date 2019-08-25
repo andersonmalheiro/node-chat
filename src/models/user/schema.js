@@ -1,11 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Schema de usuário
 const schema = new Schema(
   {
-    name: {
+    username: {
       type: String,
+      unique: true,
       required: [true]
     },
     avatar: {

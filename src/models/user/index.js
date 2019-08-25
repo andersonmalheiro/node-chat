@@ -1,1 +1,3 @@
-export * from './model';
+const userModel = require("./model");
+
+module.exports = userModel;
