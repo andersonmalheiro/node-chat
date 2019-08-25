@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Schema de usuário
@@ -7,19 +7,19 @@ const schema = new Schema(
     username: {
       type: String,
       unique: true,
-      required: [true]
+      required: [true],
     },
     avatar: {
       type: String,
-      required: [false]
+      required: [false],
     },
     password: {
       type: String,
-      required: [true]
-    }
+      required: [true],
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 

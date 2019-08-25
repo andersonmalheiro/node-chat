@@ -2,7 +2,7 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-const create = ({ User }, { config }) => async (req, res, next) => {
+const register = ({ User }, { config }) => async (req, res, next) => {
   const payload = req.body;
   const hash = bcrypt.hashSync(payload['password'], saltRounds);
   payload['password'] = hash;
@@ -23,4 +23,4 @@ const create = ({ User }, { config }) => async (req, res, next) => {
   }
 };
 
-module.exports = create;
+module.exports = register;

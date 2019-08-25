@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
@@ -7,20 +7,20 @@ const schema = new Schema(
   {
     text: {
       type: String,
-      required: [true]
+      required: [true],
     },
     image: {
       type: String,
-      required: [false]
+      required: [false],
     },
     user: {
       type: ObjectId,
-      ref: "User",
-      required: [true]
-    }
+      ref: 'User',
+      required: [true],
+    },
   },
   {
-    timestamps: true
+    timestamps: true,
   }
 );
 

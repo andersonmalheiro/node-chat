@@ -1,3 +1,3 @@
-const messageModel = require("./model");
+const messageModel = require('./model');
 
 module.exports = messageModel;

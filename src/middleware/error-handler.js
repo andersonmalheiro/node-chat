@@ -1,5 +1,5 @@
-const { APIError, InternalServerError } = require("rest-api-errors");
-const { STATUS_CODES } = require("http");
+const { APIError, InternalServerError } = require('rest-api-errors');
+const { STATUS_CODES } = require('http');
 
 const errorHandler = (err, req, res, next) => {
   console.log(err);
@@ -9,13 +9,13 @@ const errorHandler = (err, req, res, next) => {
       : new InternalServerError();
 
   // Mongoose errors
-  if (["ValidationError", "UserExistsError"].includes(err.name)) {
+  if (['ValidationError', 'UserExistsError'].includes(err.name)) {
     return res.status(405).json(err);
   }
 
   return res.status(error.status || 500).json({
     code: error.code || 500,
-    message: error.message || STATUS_CODES[error.status]
+    message: error.message || STATUS_CODES[error.status],
   });
 };
 

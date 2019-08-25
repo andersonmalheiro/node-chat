@@ -3,7 +3,7 @@ const get = ({ User }, { config }) => async (req, res, next) => {
   const { _id } = req.params;
   try {
     // Busca o usuario
-    const user = await User.findById({ _id }).select("-password");
+    const user = await User.findById({ _id }).select('-password');
     res.status(200).send({ user });
   } catch (error) {
     // Envia o erro para o handler de erros
