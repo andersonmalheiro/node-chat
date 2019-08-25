@@ -1,41 +1,33 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const { connectDb } = require("./src/db");
+const api = require("./src/api");
+const config = require("./config");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// Express app
+const app = express();
 
-const api = require('./src/api');
+// Conexão com o banco
+connectDb().then(res => {
+  console.log("\nMongoDB Connected\n");
+});
 
-var app = express();
+// Mensagens de log
+app.use(logger("dev"));
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// Diretorio de arquivos estáticos
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/api/v1', api(config))
+const indexRouter = require("./routes/index");
+app.use("/", indexRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+// Rota da api
+app.use("/api/v1", api(config));
 
 module.exports = app;
