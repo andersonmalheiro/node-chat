@@ -10,8 +10,10 @@ const update = ({ User }, { config }) => async (req, res, next) => {
       (err, response) => {
         if (err) {
           next(err);
-        } else {
+        } else if (response) {
           res.status(200).send({ response });
+        } else {
+          res.status(400).send({ error: 'User not found.' });
         }
       }
     );

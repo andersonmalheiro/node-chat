@@ -2,7 +2,6 @@ const { APIError, InternalServerError } = require('rest-api-errors');
 const { STATUS_CODES } = require('http');
 
 const errorHandler = (err, req, res, next) => {
-  console.log(err);
   const error =
     err.status === 401 || err instanceof APIError
       ? err

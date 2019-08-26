@@ -3,9 +3,13 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const register = ({ User }, { config }) => async (req, res, next) => {
+  // Obtem dados da request
   const payload = req.body;
-  const hash = bcrypt.hashSync(payload['password'], saltRounds);
-  payload['password'] = hash;
+
+  // Encripta a senha
+  const hash = bcrypt.hashSync(payload.password, saltRounds);
+  payload.password = hash;
+
   // Cria novo usuário
   const user = new User(payload);
 
@@ -14,7 +18,7 @@ const register = ({ User }, { config }) => async (req, res, next) => {
       if (err) {
         next(err);
       } else {
-        res.status(201).send();
+        res.status(201).send({ user });
       }
     });
   } catch (error) {

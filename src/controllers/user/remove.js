@@ -3,11 +3,12 @@ const remove = ({ User }, { config }) => async (req, res, next) => {
 
   try {
     await User.findByIdAndRemove(_id, (err, response) => {
-      console.log(response);
       if (err) {
         next(err);
-      } else {
+      } else if (response) {
         res.status(204).send();
+      } else {
+        res.status(400).send({ error: 'User not found.' });
       }
     });
   } catch (error) {
